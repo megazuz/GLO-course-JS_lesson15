@@ -36,41 +36,27 @@ const newElem1 = new DomElement;
 newElem1.width = '100px';
 newElem1.height = '100px';
 newElem1.bg = 'green';
-newElem1.position = 'absolute';
 
 document.addEventListener("DOMContentLoaded", newP.addToDom('#p1'));
 document.addEventListener("DOMContentLoaded", newElem1.addToDom('.block'));
 
-const toInt = function (str) { return parseInt(str.split(/\D/).join('')) };
-const nodeMove = function (text, step = 10, max = 1000, min = 0) {
-    text = (toInt(text) + toInt(step));
-    (text < toInt(min)) ? text = 0 : {};
-    (text > toInt(max)) ? text = max : {};
-    return toString(text) + 'px';
+const toInt = function (str) {
+    str = str + '';
+    return parseInt(str.split(/\D/).join(''));
 };
 
-const newChild = document.createElement('div');
-newChild.textContent = 'Новая нода';
-newChild.style.background = 'red';
-newChild.style.width = '100px';
-newChild.style.height = '100px';
-newChild.style.textAlign = 'center';
-newChild.style.position = 'absolute';
-newChild.style.top = '10px';
-newChild.style.left = '500px'
+const movingBLock = document.querySelector('.block');
+movingBLock.style.position = 'absolute';
+movingBLock.style.top = '100px';
+movingBLock.style.left = '300px';
+console.log(movingBLock);
+
 document.addEventListener('keydown', (event) => {
     const key = event.key;
     switch (key) {
-        case 'ArrowUp': newChild.style.top = nodeMove(newChild.style.top, -10); break;
-        case 'ArrowDown': newChild.style.top = nodeMove(newChild.style.top, 10, 500); break;
-        case 'ArrowLeft': newChild.style.left = nodeMove(newChild.style.left, -10); break;
-        case 'ArrowRight': newChild.style.left = nodeMove(newChild.style.left, 10, 1000); break;
+        case 'ArrowUp': movingBLock.style.top = (toInt(movingBLock.style.top) - 10) + 'px'; break;
+        case 'ArrowDown': movingBLock.style.top = (toInt(movingBLock.style.top) + 10) + 'px'; break;
+        case 'ArrowLeft': movingBLock.style.left = (toInt(movingBLock.style.left) - 10) + 'px'; break;
+        case 'ArrowRight': movingBLock.style.left = (toInt(movingBLock.style.left) + 10) + 'px'; break;
     }
 });
-document.body.appendChild(newChild);
-
-
-console.log(newP);
-console.log(newElem1);
-console.log(newChild);
-
